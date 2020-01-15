@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Launcher} from 'react-chatbot-window'
 import {connect} from 'react-redux';
 import {sendMessage} from './chat'
+import './chat.css'
 
 class Demo extends Component {
  
@@ -39,8 +40,7 @@ class Demo extends Component {
     return (<div>
       <Launcher
         agentProfile={{
-          teamName: 'react-chat-window',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
+          imageUrl: 'https://gladynamics.blob.core.windows.net/imgpublic/logo-andreani-bn.png'
         }}
         onMessageWasSent={this._onMessageWasSent.bind(this)}
         messageList={this.state.messageList}

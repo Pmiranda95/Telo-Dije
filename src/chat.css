@@ -1,0 +1,9 @@
+.sc-header {
+    background: rgb(207, 22, 47) !important
+}
+
+.sc-header--img {
+    width: 150px !important;
+    border-radius: 0% !important;
+
+}
