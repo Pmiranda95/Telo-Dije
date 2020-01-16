@@ -5,32 +5,28 @@ const accessToken = '91506332ee83450294170ac12e9ea9a3';
 const client = new ApiAiClient({accessToken});
 const ON_MESSAGE = 'ON_MESSAGE';
 
-export const sendMessage = (text,sender='user') => ({
+export const sendMessage = (text, author='me',type='text') => ({
     type:ON_MESSAGE,
-    payload:{text,sender}
+    payload:{author,type,data:{text:text}}
 })
 
 const messageMiddleware = ()=> next => action => {
     next(action);
     if(action.type === ON_MESSAGE){
         const {text} = action.payload;
-        client.textRequest(text)
+        client.textRequest(action.payload.data.text)
             .then(onSuccess)
             function onSuccess(response){
                const {result:{fulfillment}} = response;
-                next(sendMessage(fulfillment.speech,'bot'));
+                next(sendMessage(fulfillment.speech,'then'));
             }
     }
 };
 
-
-const initState = [{
-    text:'hola como estas'
-}]
-
-const messaggeReducer = (state=initState,action) => {
+const messaggeReducer = (state=[],action) => {
     switch(action.type){
         case ON_MESSAGE:
+            console.log(action.payload);
             return [...state,action.payload];
         
         default:
